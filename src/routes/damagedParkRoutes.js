@@ -6,20 +6,20 @@ import { checkRole } from '../middleware/roleMiddleware.js';
 
 const router = express.Router();
 
-// Add this route before other routes
-router.get('/my-reports', authMiddleware, damageController.getMyReports);
-
 // Public routes (if any)
 router.get('/', authMiddleware, checkRole(['admin']), damagedParkController.getAllDamagedParks);
+
+// Search and filter routes - must come before :id route
+router.get('/search', authMiddleware, damagedParkController.searchDamagedParks);
+router.get('/my-reports', authMiddleware, damageController.getMyReports);
+router.get('/user/reports', authMiddleware, damagedParkController.getMyDamagedParks);
+
+// Parameterized routes
 router.get('/:id', damagedParkController.getDamagedParkById);
 
-// Protected routes - require authentication
-router.use(authMiddleware); // Apply auth middleware to all routes below
-
+// Protected routes
 router.post('/report', authMiddleware, checkRole(['admin', 'user']), damagedParkController.reportDamagedPark);
-router.put('/:id', authMiddleware, checkRole(['admin']), damagedParkController.updateDamagedPark);
+router.put('/:id', authMiddleware, checkRole(['admin']), damagedParkController.updateDamagedParkStatus);
 router.delete('/:id', authMiddleware, checkRole(['admin']), damagedParkController.deleteDamagedPark);
-router.get('/search', damagedParkController.searchDamagedParks);
-router.get('/user/reports', damagedParkController.getMyDamagedParks);
 
 export default router;

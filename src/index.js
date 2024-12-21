@@ -26,6 +26,9 @@ app.use(fileUpload({
   createParentPath: true
 }));
 
+// Make sure this comes before your routes
+app.use('/public', express.static('public'));
+
 // Mount all routes (remove the global auth middleware)
 app.use('/api', routes);
 

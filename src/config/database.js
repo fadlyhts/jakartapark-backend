@@ -51,7 +51,7 @@ export const initializeDatabase = async () => {
         facilities TEXT,
         description TEXT,
         coordinates VARCHAR(255),
-        images LONGBLOB,
+        images VARCHAR(255),
         status ENUM('active', 'inactive') DEFAULT 'active',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -65,7 +65,7 @@ export const initializeDatabase = async () => {
         damage_description TEXT NOT NULL,
         reported_by INT NOT NULL,
         status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
-        images LONGBLOB,
+        images VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (park_id) REFERENCES parks(id),
         FOREIGN KEY (reported_by) REFERENCES users(id)

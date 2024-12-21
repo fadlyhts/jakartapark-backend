@@ -1,35 +1,29 @@
 import express from 'express';
-import * as parkController from '../controllers/parkController.js';
-import { authMiddleware } from '../middleware/authMiddleware.js';
-import { checkRole } from '../middleware/roleMiddleware.js';
-
-const router = express.Router();
-
-// Public routes
-router.get('/', parkController.getAllParks);
-router.get('/:id', parkController.getParkById);
-
-// Protected routes
-router.post('/', authMiddleware, checkRole(['admin']), parkController.createPark);
-router.put('/:id', authMiddleware, checkRole(['admin']), parkController.updatePark);
-router.delete('/:id', authMiddleware, checkRole(['admin']), parkController.deletePark);
-
-export { router };
-
-import express from 'express';
+import cors from 'cors';
+import fileUpload from 'express-fileupload';
 import authRoutes from './routes/authRoutes.js';
 import parkRoutes from './routes/parkRoutes.js';
+import damagedParkRoutes from './routes/damagedParkRoutes.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
-
-// Mount routes
-app.use('/api/parks', parkRoutes);  // Mount before other routes
+app.use(express.static(path.join(__dirname, '..'))); // Serve files from backend root
+app.use(fileUpload({
+  createParentPath: true,
+  limits: { fileSize: 50 * 1024 * 1024 } // 50MB max file size
+}));
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/parks', parkRoutes);
+app.use('/api/damaged-parks', damagedParkRoutes);
 
 export default app;
