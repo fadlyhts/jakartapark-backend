@@ -1,36 +1,12 @@
 import { pool } from '../config/database.js';
-import path from 'path';
-import fs from 'fs/promises';
-
-const UPLOAD_DIR = 'public/uploads/parks';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
-
-// Create the upload directory if it doesn't exist
-import { mkdir } from 'fs/promises';
-try {
-  await mkdir(UPLOAD_DIR, { recursive: true });
-} catch (err) {
-  console.log('Upload directory already exists or could not be created');
-}
 
 export const getAllParks = async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM parks WHERE status = "active"');
-    const parks = rows.map(park => {
-      const transformed = { ...park };
-      if (park.images) {
-        // Return the URL instead of buffer
-        transformed.imageUrl = `${BASE_URL}/public/uploads/parks/${park.images}`;
-        // Remove the buffer data from response
-        delete transformed.images;
-      }
-      return transformed;
-    });
-
     res.json({
       status: 'success',
-      data: parks,
-      count: parks.length
+      data: rows,
+      count: rows.length
     });
   } catch (error) {
     res.status(500).json({ 
@@ -54,16 +30,9 @@ export const getParkById = async (req, res) => {
       });
     }
 
-    // Transform the image data
-    const park = { ...rows[0] };
-    if (park.images) {
-      park.imageUrl = `${BASE_URL}/public/uploads/parks/${park.images}`;
-      delete park.images;
-    }
-
     res.json({
       status: 'success',
-      data: park
+      data: rows[0]
     });
   } catch (error) {
     res.status(500).json({ 
@@ -91,29 +60,25 @@ export const formatFacilities = (facilities) => {
 export const createPark = async (req, res) => {
   try {
     const { name, location, openhours, facilities, description, coordinates } = req.body;
+    
+    // Format facilities properly
     const formattedFacilities = formatFacilities(facilities);
     
-    let imageName = null;
+    let imageBuffer = null;
     if (req.files && req.files.images) {
-      const image = req.files.images;
-      imageName = `${Date.now()}-${image.name}`;
-      const uploadPath = path.join(UPLOAD_DIR, imageName);
-      await image.mv(uploadPath);
+      imageBuffer = req.files.images.data;
     }
 
     const [result] = await pool.query(
       `INSERT INTO parks (name, location, openhours, facilities, description, coordinates, images) 
        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [name, location, openhours, formattedFacilities, description, coordinates, imageName]
+      [name, location, openhours, formattedFacilities, description, coordinates, imageBuffer]
     );
 
     res.status(201).json({
       status: 'success',
       message: 'Park created successfully',
-      data: { 
-        id: result.insertId,
-        imageUrl: imageName ? `${BASE_URL}/public/uploads/parks/${imageName}` : null
-      }
+      data: { id: result.insertId }
     });
   } catch (error) {
     res.status(500).json({ 
@@ -126,10 +91,13 @@ export const createPark = async (req, res) => {
 export const updatePark = async (req, res) => {
   try {
     const { id } = req.params;
-    const updateFields = { ...req.body };
-    delete updateFields.images; // Remove images from updateFields to handle separately
+    const updateFields = req.body;
 
-    const [park] = await pool.query('SELECT images FROM parks WHERE id = ?', [id]);
+    const [park] = await pool.query(
+      'SELECT * FROM parks WHERE id = ?',
+      [id]
+    );
+
     if (park.length === 0) {
       return res.status(404).json({
         status: 'error',
@@ -137,26 +105,6 @@ export const updatePark = async (req, res) => {
       });
     }
 
-    // Handle image update
-    let imageName = park[0].images;
-    if (req.files && req.files.images) {
-      // Delete old image if exists
-      if (imageName) {
-        try {
-          await fs.unlink(path.join(UPLOAD_DIR, imageName));
-        } catch (err) {
-          console.error('Error deleting old image:', err);
-        }
-      }
-      
-      // Save new image
-      const image = req.files.images;
-      imageName = `${Date.now()}-${image.name}`;
-      const uploadPath = path.join(UPLOAD_DIR, imageName);
-      await image.mv(uploadPath);
-    }
-
-    // Prepare update query
     const updates = [];
     const values = [];
 
@@ -170,28 +118,21 @@ export const updatePark = async (req, res) => {
       }
     });
 
-    // Add image update if there's a new image
-    if (imageName !== park[0].images) {
+    if (req.files && req.files.images) {
       updates.push('images = ?');
-      values.push(imageName);
+      values.push(req.files.images.data);
     }
 
-    // Add id as last parameter
     values.push(id);
 
-    if (updates.length > 0) {
-      await pool.query(
-        `UPDATE parks SET ${updates.join(', ')} WHERE id = ?`,
-        values
-      );
-    }
+    await pool.query(
+      `UPDATE parks SET ${updates.join(', ')} WHERE id = ?`,
+      values
+    );
 
     res.json({
       status: 'success',
-      message: 'Park updated successfully',
-      data: {
-        imageUrl: imageName ? `${BASE_URL}/public/uploads/parks/${imageName}` : null
-      }
+      message: 'Park updated successfully'
     });
   } catch (error) {
     res.status(500).json({ 
@@ -264,20 +205,12 @@ export const searchParks = async (req, res) => {
 
     const [rows] = await pool.query(sqlQuery, params);
 
-    // Transform the results to include image URLs
-    const parks = rows.map(park => {
-      const transformed = { ...park };
-      if (park.images) {
-        transformed.imageUrl = `${BASE_URL}/public/uploads/parks/${park.images}`;
-        delete transformed.images;
-      }
-      return transformed;
-    });
+    console.log('Found rows:', rows);
 
     return res.status(200).json({
       status: 'success',
-      data: parks,
-      count: parks.length
+      data: rows,
+      count: rows.length
     });
 
   } catch (error) {
