@@ -1,0 +1,227 @@
+{
+  "parks": [
+    {
+      "name": "Taman Menteng",
+      "location": "Menteng, Jakarta Pusat",
+      "openhours": "06:00 - 18:00",
+      "facilities": [
+        "Jogging Track",
+        "Playground",
+        "Gazebo",
+        "Area Hijau",
+        "Tempat Duduk"
+      ],
+      "description": "Taman Menteng adalah ruang terbuka hijau di Jakarta Pusat dengan fasilitas seperti lapangan olahraga, taman bermain, dan jogging track. Dibangun di bekas Stadion Menteng, taman ini menjadi tempat rekreasi dan aktivitas warga di tengah kota",
+      "coordinates": "-6.2088,106.8456"
+    },
+    {
+      "name": "Taman Suropati",
+      "location": "Menteng, Jakarta Pusat",
+      "openhours": "24 Jam",
+      "facilities": [
+        "Area Bersejarah",
+        "Spot Foto",
+        "Area Duduk",
+        "Patung",
+        "Area Musik"
+      ],
+      "description": "Taman Suropati adalah ruang terbuka hijau di kawasan Menteng, Jakarta Pusat, yang dikenal dengan suasana sejuk, pepohonan rindang, dan karya seni berupa patung perdamaian. Taman ini sering menjadi tempat bersantai, berolahraga, dan berkumpulnya komunitas seni serta musik",
+      "coordinates": "-6.2095,106.8341"
+    },
+    {
+      "name": "Taman Mini Indonesia Indah",
+      "location": "Cipayung, Jakarta Timur",
+      "openhours": "08:00 - 17:00",
+      "facilities": [
+        "Museum",
+        "Kebun Binatang",
+        "Teater",
+        "Area Budaya",
+        "Danau"
+      ],
+      "description": "Taman Mini Indonesia Indah (TMII) adalah taman budaya di Jakarta Timur yang menampilkan miniatur keragaman budaya Indonesia. Dengan paviliun daerah, museum, wahana edukasi, dan rekreasi, TMII menjadi destinasi wisata edukatif dan budaya yang ikonik",
+      "coordinates": "-6.3028,106.8526"
+    },
+    {
+      "name": "Taman Impian Jaya Ancol",
+      "location": "Ancol, Jakarta Utara",
+      "openhours": "08:00 - 22:00",
+      "facilities": [
+        "Pantai",
+        "Waterpark",
+        "Taman Hiburan",
+        "Restoran",
+        "Hotel",
+        "Kolam Renang"
+      ],
+      "description": "Taman Impian Jaya Ancol adalah kawasan rekreasi terbesar di Jakarta Utara, menawarkan pantai, taman bermain Dunia Fantasi, Sea World, Atlantis, dan fasilitas hiburan lainnya. Ancol menjadi destinasi wisata favorit untuk keluarga dan liburan",
+      "coordinates": "-6.1239,106.8510"
+    },
+    {
+      "name": "Lapangan Banteng",
+      "location": "Gambir, Jakarta Pusat",
+      "openhours": "24 Jam",
+      "facilities": [
+        "Area Olahraga",
+        "Monumen",
+        "Area Berkumpul",
+        "Tempat Duduk"
+      ],
+      "description": "Lapangan Banteng adalah ruang terbuka hijau di Jakarta Pusat yang dikenal dengan Monumen Pembebasan Irian Barat, taman air mancur menari, dan area olahraga. Tempat ini sering digunakan untuk rekreasi dan acara publik",
+      "coordinates": "-6.1753,106.8336"
+    },
+    {
+      "name": "Taman Semanggi",
+      "location": "Setiabudi, Jakarta Selatan",
+      "openhours": "06:00 - 19:00",
+      "facilities": [
+        "Area Bermain",
+        "Jogging Track",
+        "Area Hijau",
+        "Tempat Duduk",
+        "Air Mancur"
+      ],
+      "description": "Taman Semanggi adalah ruang hijau di sekitar Simpang Susun Semanggi, Jakarta Selatan, yang berfungsi sebagai area penghijauan kota dan tempat bersantai. Taman ini mempercantik lanskap ikonik pusat Jakarta",
+      "coordinates": "-6.2240,106.8310"
+    },
+    {
+      "name": "Taman Tebet",
+      "location": "Tebet, Jakarta Selatan",
+      "openhours": "06:00 - 19:00",
+      "facilities": [
+        "Jogging Track",
+        "Area Fitness",
+        "Playground",
+        "Tempat Duduk",
+        "Area Hijau"
+      ],
+      "description": "Taman Tebet, kini dikenal sebagai Tebet Eco Park, adalah ruang hijau di Jakarta Selatan dengan konsep ramah lingkungan. Taman ini dilengkapi area bermain, jogging track, dan jembatan ikonik, menjadi tempat rekreasi warga",
+      "coordinates": "-6.2260,106.8520"
+    },
+    {
+      "name": "Taman Waduk Pluit",
+      "location": "Penjaringan, Jakarta Utara",
+      "openhours": "06:00 - 18:00",
+      "facilities": [
+        "Area Memancing",
+        "Jogging Track",
+        "Tempat Duduk",
+        "Area Hijau",
+        "Spot Foto"
+      ],
+      "description": "Taman Waduk Pluit adalah ruang terbuka hijau di Jakarta Utara yang berfungsi sebagai area resapan air sekaligus tempat rekreasi. Taman ini memiliki jogging track, area bermain, dan pemandangan waduk yang asri",
+      "coordinates": "-6.1260,106.7850"
+    },
+    {
+      "name": "Taman BMW",
+      "location": "Kebayoran Baru, Jakarta Selatan",
+      "openhours": "05:00 - 20:00",
+      "facilities": [
+        "Area Fitness",
+        "Jogging Track",
+        "Area Bermain Anak",
+        "Tempat Duduk",
+        "Area Hijau"
+      ],
+      "description": "Taman BMW, atau Taman Bersih, Manusiawi, dan Wibawa, adalah ruang terbuka hijau di Jakarta Utara yang difungsikan sebagai area olahraga, rekreasi, dan pelestarian lingkungan. Taman ini memiliki lapangan luas dan pepohonan rindang",
+      "coordinates": "-6.2420,106.8050"
+    },
+    {
+      "name": "Taman Cattleya",
+      "location": "Kelapa Gading, Jakarta Utara",
+      "openhours": "06:00 - 20:00",
+      "facilities": [
+        "Area Fitness",
+        "Jogging Track",
+        "Playground",
+        "Tempat Duduk",
+        "Area Hijau"
+      ],
+      "description": "Taman Cattleya adalah ruang terbuka hijau di Jakarta Barat yang dilengkapi dengan fasilitas jogging track, area bermain anak, dan pepohonan rindang, menjadikannya tempat rekreasi yang nyaman bagi warga",
+      "coordinates": "-6.1550,106.9110"
+    },
+    {
+      "name": "Taman Lalu Lintas",
+      "location": "Kelapa Gading, Jakarta Utara",
+      "openhours": "08:00 - 17:00",
+      "facilities": [
+        "Edukasi Lalu Lintas",
+        "Playground",
+        "Museum Mini",
+        "Area Bermain",
+        "Tempat Duduk"
+      ],
+      "description": "Taman Lalu Lintas adalah ruang terbuka hijau di Jakarta yang dirancang sebagai area edukasi mengenai keselamatan berlalu lintas untuk anak-anak. Taman ini dilengkapi dengan miniatur jalan raya dan rambu lalu lintas",
+      "coordinates": "-6.1620,106.9050"
+    },
+    {
+      "name": "Taman Pemuda Pratama",
+      "location": "Rawamangun, Jakarta Timur",
+      "openhours": "06:00 - 18:00",
+      "facilities": [
+        "Lapangan Olahraga",
+        "Area Fitness",
+        "Jogging Track",
+        "Area Bermain",
+        "Tempat Duduk"
+      ],
+      "description": "Taman Pemuda Pratama adalah ruang terbuka hijau di Jakarta Timur yang dilengkapi dengan fasilitas olahraga, jogging track, dan area bermain anak. Taman ini menjadi tempat rekreasi yang nyaman bagi warga sekitar",
+      "coordinates": "-6.1870,106.8726"
+    },
+    {
+      "name": "Taman Kota Pluit",
+      "location": "Penjaringan, Jakarta Utara",
+      "openhours": "05:00 - 20:00",
+      "facilities": [
+        "Area Bermain Anak",
+        "Jogging Track",
+        "Tempat Duduk",
+        "Area Hijau",
+        "Kolam Ikan"
+      ],
+      "description": "Taman Kota Pluit adalah ruang terbuka hijau di Jakarta Utara dengan fasilitas jogging track, area bermain anak, dan taman yang asri, menyediakan tempat rekreasi yang menyegarkan di tengah kota",
+      "coordinates": "-6.1220,106.7894"
+    },
+    {
+      "name": "Taman Ayodya",
+      "location": "Pasar Minggu, Jakarta Selatan",
+      "openhours": "06:00 - 19:00",
+      "facilities": [
+        "Area Bermain",
+        "Tempat Duduk",
+        "Toilet Umum",
+        "Jogging Track",
+        "Area Hijau"
+      ],
+      "description": "Taman Ayodya adalah ruang terbuka hijau di Jakarta Selatan, dengan pepohonan rindang, danau kecil, serta fasilitas olahraga. Taman ini menjadi tempat rekreasi yang tenang dan nyaman bagi warga sekitar",
+      "coordinates": "-6.2900,106.8230"
+    },
+    {
+      "name": "Taman Menteng Park",
+      "location": "Menteng, Jakarta Pusat",
+      "openhours": "06:00 - 18:00",
+      "facilities": [
+        "Jogging Track",
+        "Playground",
+        "Gazebo",
+        "Area Hijau",
+        "Tempat Duduk"
+      ],
+      "description": "Taman Menteng Park adalah ruang terbuka hijau di Jakarta Pusat dengan fasilitas jogging track, area bermain anak, dan taman yang asri, menjadi tempat rekreasi dan olahraga yang populer di tengah kota",
+      "coordinates": "-6.2080,106.8450"
+    },
+    {
+      "name": "Taman Sari",
+      "location": "Taman Sari, Jakarta Barat",
+      "openhours": "06:00 - 18:00",
+      "facilities": [
+        "Area Olahraga",
+        "Tempat Duduk",
+        "Area Hijau",
+        "Spot Foto"
+      ],
+      "description": "Taman Sari adalah taman bersejarah di Jakarta Barat yang dulunya merupakan bagian dari kompleks Istana Sultanan Banten. Saat ini, taman ini menjadi ruang terbuka hijau yang nyaman untuk rekreasi dan bersantai",
+      "coordinates": "-6.1500,106.7850"
+    }
+  ]
+}
