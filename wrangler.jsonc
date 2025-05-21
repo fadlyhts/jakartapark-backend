@@ -31,7 +31,7 @@
   "workers_dev": true,
   "usage_model": "bundled",
   "build": {
-    "command": "npm run build"
+    "command": "npm run start"
   },
   // Add custom bindings for your environment variables
   "vars": {
