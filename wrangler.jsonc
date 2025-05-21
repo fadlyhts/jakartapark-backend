@@ -1,0 +1,48 @@
+{
+  "name": "park-management-api",
+  "main": "src/index.js",
+  "compatibility_date": "2024-12-04",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "env": {
+    "production": {
+      "vars": {
+        "NODE_ENV": "production"
+      }
+    },
+    "development": {
+      "vars": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "routes": [
+    { "pattern": "api.parkmanagement.com/*", "zone_name": "parkmanagement.com" }
+  ],
+  "d1_databases": [
+    {
+      "binding": "PARK_DB",
+      "database_name": "jakartapark_db",
+      "database_id": "YOUR_DATABASE_ID"
+    }
+  ],
+  // Configure this to match your MySQL database connection
+  "workers_dev": true,
+  "usage_model": "bundled",
+  "build": {
+    "command": "npm run build"
+  },
+  // Add custom bindings for your environment variables
+  "vars": {
+    "JWT_SECRET": ""
+  },
+  // Configure R2 for file uploads
+  "r2_buckets": [
+    {
+      "binding": "PARK_IMAGES",
+      "bucket_name": "park-images",
+      "preview_bucket_name": "park-images-dev"
+    }
+  ]
+}
