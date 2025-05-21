@@ -1,5 +1,5 @@
 {
-  "name": "park-management-api",
+  "name": "jakartapark-backend",
   "main": "src/index.js",
   "compatibility_date": "2024-12-04",
   "compatibility_flags": [
