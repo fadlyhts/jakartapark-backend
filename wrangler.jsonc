@@ -24,7 +24,7 @@
     {
       "binding": "PARK_DB",
       "database_name": "jakartapark_db",
-      "database_id": "YOUR_DATABASE_ID"
+      "database_id": ""
     }
   ],
   // Configure this to match your MySQL database connection
