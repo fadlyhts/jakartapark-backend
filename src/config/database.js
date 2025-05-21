@@ -1,20 +1,17 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 // Load environment variables from .env file
 dotenv.config();
 
-// SSL configuration
-const sslConfig = process.env.DB_USE_SSL === 'true' ? {
+// SSL configuration - More explicit configuration for mysql2
+const sslOptions = {
+  // Force use of TLS 
   ssl: {
-    rejectUnauthorized: process.env.DB_REJECT_UNAUTHORIZED === 'true',
-    // If you have CA certificate, uncomment these lines
-    // ca: process.env.DB_CA_CERT ? Buffer.from(process.env.DB_CA_CERT, 'base64').toString('ascii') : undefined,
+    // You can add specific SSL options if needed
+    rejectUnauthorized: process.env.DB_REJECT_UNAUTHORIZED !== 'false'
   }
-} : {};
+};
 
 export const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
@@ -24,12 +21,13 @@ export const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10'),
   queueLimit: 0,
-  ...sslConfig
+  // Always enable SSL for this connection
+  ...sslOptions
 });
 
 export const initializeDatabase = async () => {
   try {
-    // Create connection without database selected, with SSL if needed
+    // Create connection without database selected, with SSL enabled
     const initPool = mysql.createPool({
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'root',
@@ -37,7 +35,8 @@ export const initializeDatabase = async () => {
       waitForConnections: true,
       connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10'),
       queueLimit: 0,
-      ...sslConfig
+      // Always enable SSL for this connection
+      ...sslOptions
     });
 
     const dbName = process.env.DB_NAME || 'jakartapark_db';
@@ -50,8 +49,25 @@ export const initializeDatabase = async () => {
     await initPool.query(`USE ${dbName}`);
     console.log(`Using database ${dbName}`);
     
-    // Rest of your code for creating tables...
-    // ... (unchanged)
+    // Create users table if not exists
+    const createUsersTable = `
+      CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role ENUM('admin', 'user') DEFAULT 'user',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )`;
+    
+    // Rest of your table creation code...
+    // [...]
+
+    // Execute table creation queries
+    await pool.execute(createUsersTable);
+    // Rest of your execute statements...
+    
+    console.log('All tables initialized successfully');
 
   } catch (error) {
     console.error('Error initializing database:', error);
