@@ -1,12 +1,16 @@
 import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 export const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'jakartapark_db',
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'jakartapark_db',
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10'),
   queueLimit: 0
 });
 
@@ -14,21 +18,23 @@ export const initializeDatabase = async () => {
   try {
     // Create connection without database selected
     const initPool = mysql.createPool({
-      host: 'localhost',
-      user: 'root',
-      password: '',
+      host: process.env.DB_HOST || 'localhost',
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || '',
       waitForConnections: true,
-      connectionLimit: 10,
+      connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10'),
       queueLimit: 0
     });
 
+    const dbName = process.env.DB_NAME || 'jakartapark_db';
+
     // Create database if not exists
-    await initPool.query(`CREATE DATABASE IF NOT EXISTS jakartapark_db`);
-    console.log('Database jakartapark_db created or already exists');
+    await initPool.query(`CREATE DATABASE IF NOT EXISTS ${dbName}`);
+    console.log(`Database ${dbName} created or already exists`);
     
     // Use the created database
-    await initPool.query(`USE jakartapark_db`);
-    console.log('Using database jakartapark_db');
+    await initPool.query(`USE ${dbName}`);
+    console.log(`Using database ${dbName}`);
     
     // Create users table if not exists
     const createUsersTable = `
